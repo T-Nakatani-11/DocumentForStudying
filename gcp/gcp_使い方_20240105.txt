@@ -1,0 +1,21 @@
+・リソース階層
+	・組織→フォルダ→プロジェクト→リソース（仮想マシン・ストレージ）
+		・誰がどのリソースに対してどんなことを実行しているか一元的に管理するために組織がある。
+		・組織：Cloud Identity・Google Workspaceが必要
+		・プロジェクト：リソース管理、認証情報・権限を管理、サービスやAPIを有効化、
+				複数分けることができる（本番用・開発用）
+	・Google Cloudを使うためにはプロジェクトが必要
+	・会社(組織)としてGoogle Cloudを使うなら組織の階層を作る。
+
+・Cloud Identity and Access Management(IAM)
+	・主体・アクション・リソース
+
+・Google Cloudの操作方法
+	・Google Cloud Console：ウェブユーザーインターフェース
+	・Cloud Shell：コマンドラインインターフェース
+	・Cloud Consoleモバイルアプリ：iOS用とAndroid用
+	・RestベースのAPI：カスタムアプリケーション用
+
+・Google Cloud Console
+・Cloud Shell
+	・ブラウザ上でターミナルを起動してコマンドラインでGoogle Cloudの操作を実行できる。
