@@ -1,0 +1,28 @@
+・Linuxとは
+	・Unixという初期に生まれたOSに対して、無料（オープンソース）で提供されたOSの一つ
+		・MacOSだとUnixコマンドが使える→UNIXの系統
+		・WindowsはコマンドプロンプトというWindows限定のコマンド
+	・Linuxから派生したものはすべてLinux
+
+・ディストリビューション
+	・OSの小さな単位
+	・Debian系
+		・UIが使いやすい。
+		・Ubuntu：最も使われている
+		・Rasbian：ラズパイにも搭載
+	・Redhat系
+		・安定している。
+		・RHEL：有料サポート付き・安定したサーバーを使いたい
+		・CentOS：RHELの無料版・動作が軽い
+
+・パッケージ管理
+	・Linuxはソフトをインストールする際に「パッケージ管理機能」を使う。
+	・依存関係を理解してインストールしてくれる。
+	・※rpmファイルでインストールすると、依存ファイルもインストールが必要
+
+	・コマンド
+		・sudo yum install XXX(Red-hat系)
+		・sudo apt-get install XXX(Devian系)
+	・Linuxログイン直後は最新版に更新が必要
+		・sudo apt update
+		・sudo apt upgrade
