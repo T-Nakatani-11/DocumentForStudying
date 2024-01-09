@@ -1,0 +1,69 @@
+・SELECTデータを抽出する。
+・プレビュー
+	・BigQueryではプレビューでテーブルの中身を確認できる。
+	・レコード数も見れる（右下）
+・SELECT
+	・基本構文
+		・SELECT  カラム名  FROM  `テーブルのパス`  LIMIT 1000 
+	・テーブルのパスの書き方
+		・プロジェクト名.データセット名.テーブル名
+		・bigquery-public-data.noaa\gsod.gsod2022
+	・SELECT * EXCEPT(stn)
+		・stn以外をすべて選択。複数値を与えることができる。
+
+・クエリを記載
+	・QUERY→In new tabを選択
+	・MOREにFormat queryを選択すると整形してくれる。
+
+・SELECT AS
+	・select temp as temperature
+		・temp→temperatureというカラム名にして表示できる。
+	・ex.)SELECT stn AS station_number, date, temp FROM `` LIMIT 1000
+
+・ORDER BY
+	・SLECT... FROM ... ORDER BY カラム名	　　→昇順
+	・SLECT... FROM ... ORDER BY カラム名 DESC　→降順
+	・ORDER BYは複数キー渡すこともできる。
+	・ex.) SELECT ... FROM ... ORDER BY date DESC LIMIT 1000
+
+・四則演算
+	・カラムに対して四則演算可能+-*/
+	・SELECT stn, date, 2.0 * temp + 1.0 AS temp FROM ...
+	・演算を行った場合カラム名に名前がついていないので、ASで名前を付ける。
+	・ex.) SELECT stn, date, (temp -32) * (5.0/9.0) AS temp_c FROM ...
+
+・CAST
+	・CAST (カラム名 AS データ型)
+		・データ型：INT FROAT STRING DATEなど
+	・SELECT stn, CAST(date AS STRING), ...　→DATE型→STRING型になる
+	・ex.) SELECT stn, date, CAST((temp -32) * (5.0/9.0)) AS INT) AS temp_c FROM ...
+
+・DISTINCT
+	・DISTINCT カラム名 → 重複が消える
+		・SELECT DISTINCT date FROM ...
+・COUNT
+	・COUNT(カラム名)　→　レコード数を数える。
+		・SELECT COUNT stn FROM ...
+	・COUNT(DISTINCT カラム名)　→　DISTINCTとセットで使うとユニークなデータ数を数えられる。
+		・SELECT COUNT(DISTINCT stn) FROM ...
+	・ex.) SELECT COUNT(date) FROM ...
+	・ex.) SELECT COUNT(DISTINCT date) FROM ...
+
+・EXTRACT
+	・DATE型から年月日、曜日などの情報を抜き出せる。
+	・SELECT EXTRACT(MONTH FROM date) FROM テーブルのパス。
+
+・CASE WHEN
+	・CASE カラム名 WHEN 条件式 THEN 値 WHEN 条件式 THEN 値 ... ELSE デフォルト値 END AS カラム名
+	・CASE カラム名 WHEN 条件式 THEN 値 WHEN 条件式 THEN 値 ... ELSE デフォルト値 END AS カラム名
+	・ex.)SELECT ... , CASE WHEN (temp -32) * (5.0/9.0) >= 30 THEN `hot`
+			CASE WHEN (temp -32) * (5.0/9.0) <= 10 THEN `cold` 
+			ELSE `Comfort` 
+		END AS temp_status FROM ...
+			・不等号はカラム名に書くことができない。
+
+・COALSCE
+	・SELECT COALSCE(カラム名,デフォルト値) FROM テーブルのパス
+	・SELECT str, COALSCE(flag_max. `not_max`) AS flag_max FROM ...
+		・flag_maxがNULLだった場合、`not_max`がセットされる。
+		・カラム名とデフォルト値の型は合わせること。
